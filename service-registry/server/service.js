@@ -13,6 +13,16 @@ module.exports = (config) => {
     });
   }
 
+  service.put('/register/:servicename/:serviceversion/:serviceport', (req, res, next) => next('Not implemented'),);
+
+  service.delete(
+    '/register/:servicename/:serviceversion/:serviceport', (req, res, next) => next('Not implemented'),
+  );
+
+  service.get(
+    '/find/:servicename/:serviceversion/:serviceport', (req, res, next) => next('Not implemented'),
+  );
+
   // eslint-disable-next-line no-unused-vars
   service.use((error, req, res, next) => {
     res.status(error.status || 500);
