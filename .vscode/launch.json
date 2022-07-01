@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/feedback-service/bin/run"
+            "program": "${workspaceFolder}/service-registry/bin/run"
         }
     ]
 }
