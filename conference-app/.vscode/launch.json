@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/conference-app/server"
+            "program": "${workspaceFolder}/server/index.js"
         }
     ]
 }

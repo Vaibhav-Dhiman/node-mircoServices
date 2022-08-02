@@ -1,5 +1,9 @@
 const fs = require('fs');
 const util = require('util');
+const axios = require('axios');
+const crypto = require('crypto');
+const amqplib = require('amqplib');
+
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
@@ -9,10 +13,15 @@ class FeedbackService {
     this.datafile = datafile;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async addEntry(name, title, message) {
-    const data = await this.getData();
-    data.unshift({ name, title, message });
-    return writeFile(this.datafile, JSON.stringify(data));
+    const q = 'feedback';
+    const conn = await amqplib.connect('amqp://localhost');
+    const ch = conn.createChannel();
+    await ch.assertQueue(q);
+    const qm = JSON.stringify({name, title, message });
+    // eslint-disable-next-line no-return-await
+    return await ch.sendToQueue(q, Buffer.from(qm, 'utf8'));
   }
 
   async getList() {
